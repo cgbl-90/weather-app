@@ -2,7 +2,6 @@
 function error(err) {
   console.log("ERROR(" + err.code + "): " + err.message);
 }
-
 function convertToDay(a) {
   let allDays = [
     "Sunday",
@@ -20,28 +19,28 @@ function wSetTime(now) {
     convertToDay(now.getDay()) + ", " + now.getHours() + ":" + now.getMinutes();
 }
 function convertToCelciusToFarenheit(event) {
-  console.log("Click Celcius and Farenheit button");
+  console.log("Event: click Celcius/Farenheit button");
   event.preventDefault();
   let a = GradToShow.innerHTML;
   let b = varFeelsLike.innerHTML;
   if (myButtonGrad.innerHTML === "F") {
     a = (a * 9) / 5 + 32;
     b = (b * 9) / 5 + 32;
-    GradToShow.innerHTML = a.toFixed(2);
-    varFeelsLike.innerHTML = b.toFixed(2);
+    GradToShow.innerHTML = a;
+    varFeelsLike.innerHTML = b;
     myButtonGrad.innerHTML = "C";
     MetricToShow.innerHTML = "F";
   } else {
     a = ((a - 32) * 5) / 9;
     b = ((b - 32) * 5) / 9;
-    GradToShow.innerHTML = a.toFixed(2);
-    varFeelsLike.innerHTML = b.toFixed(2);
+    GradToShow.innerHTML = a;
+    varFeelsLike.innerHTML = b;
     myButtonGrad.innerHTML = "F";
     MetricToShow.innerHTML = "C";
   }
 }
 function swModes(event) {
-  console.log("Click Black & Ligth mode");
+  console.log("Event: click dark/ligth mode");
   event.preventDefault();
   let a = document.querySelector("html");
   if (myButtonBlackMode.innerHTML === "B") {
@@ -70,33 +69,29 @@ function printLocation(response) {
 }
 function searchCity(response) {
   console.log(response);
+  latestSearch.innerHTML = response;
   if (response === "") {
     alert("Indicate the city");
   } else {
     let apiRequest =
-      apiEndPoint +
-      "q=" +
-      response +
-      "&appid=" +
-      apiKey +
-      "&&units=metric";
+      apiEndPoint + "q=" + response + "&appid=" + apiKey + "&&units=metric";
     console.log(apiRequest);
     axios.get(apiRequest).then(printLocation);
+  }
 }
-
 function sWeatherCity(event) {
-  console.log("Click search button");
-  SearchCity(cityToSearch.value);
+  console.log("Event: click search button");
+  searchCity(cityToSearch.value);
 }
-
+function repeatSearch() {
+  cityToSearch.value = latestSearch.innerHTML;
+  searchCity(cityToSearch.value);
+}
 function returnPosition(response) {
+  console.log(response.coords.latitude);
+  console.log(response.coords.longitude);
   myLatitude = response.coords.latitude;
   myLongitude = response.coords.longitude;
-}
-
-function findCityUsingLatLong() {
-  console.log("Click locate me button");
-  navigator.geolocation.getCurrentPosition(returnPosition, error, options);
   let apiRequest =
     apiEndPoint +
     "lat=" +
@@ -109,15 +104,19 @@ function findCityUsingLatLong() {
   console.log(apiRequest);
   axios.get(apiRequest).then(printLocation);
 }
-
+function findCityUsingLatLong() {
+  console.log("Event: click locate me button");
+  navigator.geolocation.getCurrentPosition(returnPosition, error, options);
+}
 /* Set variables */
 var options = {
   enableHighAccuracy: true,
-  timeout: 500,
+  timeout: 5000,
   maximumAge: 0
 };
 let myButtonSearch = document.querySelector("#bSearch");
 let cityToSearch = document.querySelector("#cSearch");
+let latestSearch = document.querySelector("#latestSearchCity");
 let countryToShow = document.querySelector("#countryLabel");
 let cityToShow = document.querySelector("#cityLabel");
 let myButtonLocate = document.querySelector("#bLocate");
@@ -135,14 +134,19 @@ let apiKey = "05da73ad69c615537c1579e06c8164fb";
 let apiEndPoint = "https://api.openweathermap.org/data/2.5/weather?";
 let myLatitude = 0.0;
 let myLongitude = 0.0;
-
-/*  Clicks & events  */
+/*  Clicks & Enter  */
+cityToSearch.addEventListener("keypress", function (event) {
+  if (event.key === "Enter") {
+    sWeatherCity();
+  }
+});
+latestSearch.addEventListener("click", repeatSearch);
 myButtonSearch.addEventListener("click", sWeatherCity);
 myButtonBlackMode.addEventListener("click", swModes);
 myButtonGrad.addEventListener("click", convertToCelciusToFarenheit);
 myButtonLocate.addEventListener("click", findCityUsingLatLong);
-
 /* Initial settings */
 let now = new Date();
+let initialCity = "Santo Domingo";
 wSetTime(now);
-searchCity('Santo Domingo');
+searchCity(initialCity);

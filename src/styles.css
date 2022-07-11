@@ -16,7 +16,6 @@
   --horizontal--padding: 2rem;
   --vertical--padding: 1rem;
 }
-
 html {
   height: 100vh;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
@@ -32,21 +31,22 @@ html {
   background-color: var(--color--secondary);
   color: var(--color--primary);
 }
-.card {
-  padding: var(--vertical--padding) var(--horizontal--padding);
-  /*border: 0.05cm solid var(--color--accent);*/
-}
+/* Containers */
 .container {
   border: 0.05cm solid var(--color--accent);
   box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
     rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   border-radius: var(--border--radius);
   overflow: hidden;
-  margin: auto;
+  margin: auto auto;
+}
+.card {
+  padding: var(--vertical--padding) var(--horizontal--padding);
 }
 .row {
   display: grid;
 }
+
 /* Buttons */
 .btn {
   margin-top: var(--vertical--padding);
@@ -126,6 +126,13 @@ html {
   }
   .container {
     width: 85%;
-    margin: auto;
   }
+}
+#latestSearchCity {
+  text-decoration: none;
+}
+#latestSearchCity:hover,
+#latestSearchCity:focus {
+  text-decoration: underline;
+  color: var(--color--accent);
 }
