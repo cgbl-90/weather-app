@@ -42,6 +42,7 @@ html {
     rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
   border-radius: var(--border--radius);
   overflow: hidden;
+  margin: auto;
 }
 .row {
   display: grid;

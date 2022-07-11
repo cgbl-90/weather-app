@@ -1,3 +1,8 @@
+/* Catching errors */
+function error(err) {
+  console.log("ERROR(" + err.code + "): " + err.message);
+}
+
 function convertToDay(a) {
   let allDays = [
     "Sunday",
@@ -10,10 +15,7 @@ function convertToDay(a) {
   ];
   return allDays[a];
 }
-function error(err) {
-  console.log("ERROR(" + err.code + "): " + err.message);
-}
-function wSetTime(pTime) {
+function wSetTime() {
   let now = new Date();
   pTime.innerHTML =
     convertToDay(now.getDay()) + ", " + now.getHours() + ":" + now.getMinutes();
@@ -42,16 +44,16 @@ function convertToCelciusToFarenheit(event) {
 function swModes(event) {
   console.log("Click Black & Ligth mode");
   event.preventDefault();
-  let a = document.querySelector("body");
+  let a = document.querySelector("html");
   if (myButtonBlackMode.innerHTML === "B") {
     // Apply dark mode
-    a.style.backgroundColor = "black";
-    a.style.color = "white";
+    a.classList.add("dark-mode");
+    a.classList.remove("light-mode");
     myButtonBlackMode.innerHTML = "W";
   } else {
     // Apply light mode
-    a.style.backgroundColor = "white";
-    a.style.color = "black";
+    a.classList.add("light-mode");
+    a.classList.remove("dark-mode");
     myButtonBlackMode.innerHTML = "B";
   }
 }
@@ -67,41 +69,51 @@ function printLocation(response) {
   varPressure.innerHTML = response.data.main.pressure;
   varFeelsLike.innerHTML = response.data.main.feels_like;
 }
-function sWeatherCity(event) {
-  console.log("Click search button");
-  let a = cityToSearch.value;
-  console.log(cityToSearch.value);
-  if (cityToSearch.value === "") {
+function axiosSearchCity(city) {
+  console.log(city);
+  if (city === "") {
     alert("Indicate the city");
-    cityToSearch.focus();
+    city.focus();
   } else {
     event.preventDefault();
     let apiRequest =
       apiEndPoint +
       "q=" +
-      cityToSearch.value +
+      city +
       "&appid=" +
       apiKey +
       "&&units=metric";
     console.log(apiRequest);
     axios.get(apiRequest).then(printLocation);
-  }
 }
-function findCityUsingLatLong(a) {
+
+function sWeatherCity(event) {
+  console.log("Click search button");
+  axiosSearchCity(cityToSearch.value);
+}
+
+function returnPosition(response) {
+  myLatitude = response.coords.latitude;
+  myLongitude = response.coords.longitude;
+}
+
+function findCityUsingLatLong() {
   console.log("Click locate me button");
+  navigator.geolocation.getCurrentPosition(returnPosition, error, options);
   let apiRequest =
     apiEndPoint +
     "lat=" +
-    a.coords.latitude +
+    myLatitude +
     "&lon=" +
-    a.coords.longitude +
+    myLongitude +
     "&appid=" +
     apiKey +
     "&&units=metric";
   console.log(apiRequest);
   axios.get(apiRequest).then(printLocation);
 }
-// Set variables
+
+/* Set variables */
 var options = {
   enableHighAccuracy: true,
   timeout: 500,
@@ -124,12 +136,15 @@ let varPressure = document.querySelector("#pressure");
 let varFeelsLike = document.querySelector("#feelsLike");
 let apiKey = "05da73ad69c615537c1579e06c8164fb";
 let apiEndPoint = "https://api.openweathermap.org/data/2.5/weather?";
-wSetTime(pTime); // Set time & date
-//  Clicks
+let myLatitude = 0.0;
+let myLongitude = 0.0;
+
+/*  Clicks & events  */
 myButtonSearch.addEventListener("click", sWeatherCity);
 myButtonBlackMode.addEventListener("click", swModes);
 myButtonGrad.addEventListener("click", convertToCelciusToFarenheit);
-myButtonLocate.addEventListener(
-  "click",
-  navigator.geolocation.getCurrentPosition(findCityUsingLatLong, error, options)
-);
+myButtonLocate.addEventListener("click", findCityUsingLatLong);
+
+/* Initial settings */
+axiosSearchCity('Santo Domingo');
+
