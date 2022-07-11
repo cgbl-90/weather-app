@@ -8,58 +8,63 @@
     <meta name="keywords" content="weather, forecast, app" />
     <meta name="author" content="Carmen López" />
     <title>Weather App by Carmen L.</title>
-    <link rel="stylesheet" href="src/styles.css" />
     <link rel="stylesheet" href="src/normalize.css" />
+    <link rel="stylesheet" href="src/styles.css" />
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;900&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div class="container">
       <!-- Today's weather + Search -->
       <div class="row inline--1x3">
         <div class="air card">
-          <div id="wTime" class="smallText boldText align_center">-</div>
-          <section class="align_right">
-            <button id="bMode" class="air btn smallText">B</button>
-          </section>
+          <a id="bMode" class="midText toogle" href="">B</a>
+          <br />
+          <br />
+          <div id="wTime" class="midText boldText align_center">-</div>
         </div>
-        <div class="card center_card">
+        <div class="air card align_center">
           <span id="cityLabel" class="bigText boldText">Budva</span
           ><span class="bigText boldText">,&nbsp;</span>
           <span id="countryLabel" class="bigText boldText">ME</span>
           <span id="description" class="smallText display_as_block">-</span>
           <span class="smallText display_as_block"
             ><span>humidity —&nbsp;</span><span id="humidity"></span
-          ></span>
+            ><span>&nbsp;%</span></span
+          >
           <span class="smallText display_as_block"
             ><span>wind —&nbsp;</span><span id="wind"></span
-          ></span>
+            ><span>&nbsp;km/h</span></span
+          >
           <span class="smallText display_as_block"
             ><span>pressure —&nbsp;</span><span id="pressure"></span
-          ></span>
+            ><span>&nbsp;mb</span></span
+          >
           <span id="wGrad" class="bigText boldText">18 </span>
-          <span id="wMetric" class="bigText boldText">C</span>
-          <span class="smallText display_as_block"
-            ><span>feels like&nbsp;</span><span id="feelsLike"></span
-          ></span>
-          <button id="bGrad" class="air btn smallText">F</button>
-        </div>
-        <div class="air card">
-          <input
-            id="cSearch"
-            class="btn midText"
-            size="15"
-            placeholder="city"
-          />
+          <a id="wMetric" class="bigText links" href="">C|f</a>
           <div class="smallText">
-            &nbsp;&nbsp;Latest search:
-            <a id="latestSearchCity">Paris</a>
+            <span>feels like&nbsp;</span><span id="feelsLike">35</span>
           </div>
-          <button id="bSearch" class="air btn smallText display_as_block">
-            search
-          </button>
-          <button id="bLocate" class="btn smallText display_as_block">
-            my city!
-          </button>
+        </div>
+        <div class="air card smallText" style="width: fit-content;">
+          <div class="btn align_center">
+            <button id="bLocate" class="btn">
+              <img src="images/locateme.svg" style="width: 1.2rem;" />
+            </button>
+            <input id="cSearch" class="smallText" placeholder="city" />
+            <button id="bSearch" class="btn smallText">
+              SEARCH
+            </button>
+          </div>
+          <div class="smallText">
+            &nbsp;Latest search:
+            <a id="latestSearchCity" class="links">Paris</a>
+          </div>
         </div>
       </div>
       <br />
@@ -67,52 +72,55 @@
       <div class="row inline--1x4 align_left">
         <div class="card">
           <div class="smallText boldText">morning</div>
-          <div class="smallText">25</div>
-          <div class="smallText">feels like 25</div>
+          <span class="smallText">25</span>
+          <span class="smallText">| feels like <span>25</span></span>
         </div>
         <div class="card">
           <div class="smallText boldText">afternoon</div>
-          <div class="smallText">25</div>
-          <div class="smallText">feels like 25</div>
+          <span class="smallText">25</span>
+          <span class="smallText">| feels like <span>25</span></span>
         </div>
         <div class="card">
           <div class="smallText boldText">evening</div>
-          <div class="smallText">25</div>
-          <div class="smallText">feels like 25</div>
+          <span class="smallText">25</span>
+          <span class="smallText">| feels like <span>25</span></span>
         </div>
         <div class="card">
           <div class="smallText boldText">night</div>
-          <div class="smallText">25</div>
-          <div class="smallText">feels like 25</div>
+          <span class="smallText">25</span>
+          <span class="smallText">| feels like <span>25</span></span>
           <br />
         </div>
       </div>
       <!-- Daily temperatures -->
-      <div class="row inline--1x4 align_right">
+      <div class="air row inline--1x4 align_right">
         <div class="card">
           <div class="smallText boldText">tomorrow</div>
-          <div class="smallText">25 \ 20</div>
+          <div class="smallText"><span>25</span> \ <span>20</span></div>
         </div>
         <div class="card">
           <div class="smallText boldText">tuesday</div>
-          <div class="smallText">5 \ 6</div>
+          <div class="smallText"><span>25</span> \ <span>20</span></div>
         </div>
         <div class="card">
           <div class="smallText boldText">wednesday</div>
-          <div class="smallText">7 \ 10</div>
+          <div class="smallText"><span>25</span> \ <span>20</span></div>
         </div>
         <div class="card">
           <div class="smallText boldText">thursday</div>
-          <div class="smallText">7 \ 10</div>
+          <div class="smallText"><span>25</span> \ <span>20</span></div>
         </div>
         <br />
         <br />
       </div>
     </div>
-    <span class="display_as_block" style="text-align: center; font-size: 16px;">
+    <div
+      class="air display_as_block"
+      style="text-align: center; font-size: 16px;"
+    >
       <a href="https://github.com/cgbl-90/weather-app">Open-source code</a> by
-      <a href="https://cgbl-90.github.io/cgbl/">Carmen López</a>
-    </span>
+      <a href="https://cgbl-90.github.io/carmen_portfolio/">Carmen López</a>
+    </div>
     <br />
   </body>
   <script src="src/scripts.js"></script>

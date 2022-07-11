@@ -23,20 +23,18 @@ function convertToCelciusToFarenheit(event) {
   event.preventDefault();
   let a = GradToShow.innerHTML;
   let b = varFeelsLike.innerHTML;
-  if (myButtonGrad.innerHTML === "F") {
+  if (MetricToShow.innerHTML === "C|f") {
     a = (a * 9) / 5 + 32;
     b = (b * 9) / 5 + 32;
-    GradToShow.innerHTML = a;
-    varFeelsLike.innerHTML = b;
-    myButtonGrad.innerHTML = "C";
-    MetricToShow.innerHTML = "F";
+    GradToShow.innerHTML = Math.round(a);
+    varFeelsLike.innerHTML = Math.round(b);
+    MetricToShow.innerHTML = "F|c";
   } else {
     a = ((a - 32) * 5) / 9;
     b = ((b - 32) * 5) / 9;
-    GradToShow.innerHTML = a;
-    varFeelsLike.innerHTML = b;
-    myButtonGrad.innerHTML = "F";
-    MetricToShow.innerHTML = "C";
+    GradToShow.innerHTML = Math.round(a);
+    varFeelsLike.innerHTML = Math.round(b);
+    MetricToShow.innerHTML = "C|f";
   }
 }
 function swModes(event) {
@@ -47,25 +45,29 @@ function swModes(event) {
     // Apply dark mode
     a.classList.add("dark-mode");
     a.classList.remove("light-mode");
-    myButtonBlackMode.innerHTML = "W";
+    myButtonBlackMode.classList.add("toogle_light");
+    myButtonBlackMode.classList.remove("toogle");
+    myButtonBlackMode.innerHTML = "P";
   } else {
     // Apply light mode
     a.classList.add("light-mode");
     a.classList.remove("dark-mode");
+    myButtonBlackMode.classList.remove("toogle_light");
+    myButtonBlackMode.classList.add("toogle");
     myButtonBlackMode.innerHTML = "B";
   }
 }
 function printLocation(response) {
   console.log(response.data);
   cityToShow.innerHTML = response.data.name;
-  GradToShow.innerHTML = response.data.main.temp;
-  MetricToShow.innerHTML = "C";
+  MetricToShow.innerHTML = "C|f";
   countryToShow.innerHTML = response.data.sys.country;
   varHumidity.innerHTML = response.data.main.humidity;
   varWind.innerHTML = response.data.wind.speed;
   varDescription.innerHTML = response.data.weather[0].description;
   varPressure.innerHTML = response.data.main.pressure;
-  varFeelsLike.innerHTML = response.data.main.feels_like;
+  GradToShow.innerHTML = Math.round(response.data.main.temp);
+  varFeelsLike.innerHTML = Math.round(response.data.main.feels_like);
 }
 function searchCity(response) {
   console.log(response);
@@ -121,7 +123,6 @@ let countryToShow = document.querySelector("#countryLabel");
 let cityToShow = document.querySelector("#cityLabel");
 let myButtonLocate = document.querySelector("#bLocate");
 let myButtonBlackMode = document.querySelector("#bMode");
-let myButtonGrad = document.querySelector("#bGrad");
 let GradToShow = document.querySelector("#wGrad");
 let MetricToShow = document.querySelector("#wMetric");
 let pTime = document.querySelector("#wTime");
@@ -143,7 +144,7 @@ cityToSearch.addEventListener("keypress", function (event) {
 latestSearch.addEventListener("click", repeatSearch);
 myButtonSearch.addEventListener("click", sWeatherCity);
 myButtonBlackMode.addEventListener("click", swModes);
-myButtonGrad.addEventListener("click", convertToCelciusToFarenheit);
+MetricToShow.addEventListener("click", convertToCelciusToFarenheit);
 myButtonLocate.addEventListener("click", findCityUsingLatLong);
 /* Initial settings */
 let now = new Date();
