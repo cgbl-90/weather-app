@@ -15,8 +15,7 @@ function convertToDay(a) {
   ];
   return allDays[a];
 }
-function wSetTime() {
-  let now = new Date();
+function wSetTime(now) {
   pTime.innerHTML =
     convertToDay(now.getDay()) + ", " + now.getHours() + ":" + now.getMinutes();
 }
@@ -69,17 +68,15 @@ function printLocation(response) {
   varPressure.innerHTML = response.data.main.pressure;
   varFeelsLike.innerHTML = response.data.main.feels_like;
 }
-function axiosSearchCity(city) {
-  console.log(city);
-  if (city === "") {
+function searchCity(response) {
+  console.log(response);
+  if (response === "") {
     alert("Indicate the city");
-    city.focus();
   } else {
-    event.preventDefault();
     let apiRequest =
       apiEndPoint +
       "q=" +
-      city +
+      response +
       "&appid=" +
       apiKey +
       "&&units=metric";
@@ -89,7 +86,7 @@ function axiosSearchCity(city) {
 
 function sWeatherCity(event) {
   console.log("Click search button");
-  axiosSearchCity(cityToSearch.value);
+  SearchCity(cityToSearch.value);
 }
 
 function returnPosition(response) {
@@ -146,5 +143,6 @@ myButtonGrad.addEventListener("click", convertToCelciusToFarenheit);
 myButtonLocate.addEventListener("click", findCityUsingLatLong);
 
 /* Initial settings */
-axiosSearchCity('Santo Domingo');
-
+let now = new Date();
+wSetTime(now);
+searchCity('Santo Domingo');
