@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Weather App by Carmen L.</title>
+    <link rel="stylesheet" href="src/styles.css" />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <!-- 
+    Weather app project description
+    Features:
+    - White mode / black mode
+    - Search by city / location / search history
+    - Global weather API
+    - Responsive 
+    - Ajax (Axios library)
+   -->
+  <body>
+    <div class="container">
+      <!-- Today's weather + Search -->
+      <div class="row inline--1x3">
+        <div class="air card">
+          <div id="wTime" class="smallText boldText align_center">-</div>
+          <section class="align_right">
+            <button id="bMode" class="air btn smallText">B</button>
+          </section>
+        </div>
+        <div class="card center_card">
+          <span id="cityLabel" class="bigText boldText">Budva</span
+          ><span class="bigText boldText">,&nbsp;</span>
+          <span id="countryLabel" class="bigText boldText">ME</span>
+          <span id="description" class="smallText display_as_block">-</span>
+          <span class="smallText display_as_block"
+            ><span>humidity —&nbsp;</span><span id="humidity"></span
+          ></span>
+          <span class="smallText display_as_block"
+            ><span>wind —&nbsp;</span><span id="wind"></span
+          ></span>
+          <span class="smallText display_as_block"
+            ><span>pressure —&nbsp;</span><span id="pressure"></span
+          ></span>
+          <span id="wGrad" class="bigText boldText">18 </span>
+          <span id="wMetric" class="bigText boldText">C</span>
+          <span class="smallText display_as_block"
+            ><span>feels like&nbsp;</span><span id="feelsLike"></span
+          ></span>
+          <button id="bGrad" class="air btn smallText">F</button>
+        </div>
+        <div class="air card">
+          <input
+            id="cSearch"
+            class="btn midText"
+            size="15"
+            placeholder="city"
+          />
+          <div class="smallText">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Latest search:
+            <span id="latestSearchCity">Paris</span>
+          </div>
+          <button id="bSearch" class="air btn smallText display_as_block">
+            search
+          </button>
+          <button id="bLocate" class="btn smallText display_as_block">
+            find me!
+          </button>
+        </div>
+      </div>
+      <!-- Hourly temperatures -->
+      <div class="row inline--1x3 inline--1x3x4x6 align_center">
+        <div class="card">
+          <div class="midText">morning</div>
+          <div class="smallText">25</div>
+          <div class="smallText">feels like 25</div>
+        </div>
+        <div class="card">
+          <div class="midText">afternoon</div>
+          <div class="smallText">25</div>
+          <div class="smallText">feels like 25</div>
+        </div>
+        <div class="card">
+          <div class="midText">evening</div>
+          <div class="smallText">25</div>
+          <div class="smallText">feels like 25</div>
+        </div>
+        <div class="card">
+          <div class="midText">night</div>
+          <div class="smallText">25</div>
+          <div class="smallText">feels like 25</div>
+          <br />
+        </div>
+      </div>
+      <!-- Daily temperatures -->
+      <div class="row inline--1x3 inline--1x3x4x6 align_right">
+        <div class="card">
+          <div class="bigText">tomorrow</div>
+          <div class="smallText">25 \ 20</div>
+        </div>
+        <div class="card">
+          <div class="bigText">tuesday</div>
+          <div class="smallText">5 \ 6</div>
+        </div>
+        <div class="card">
+          <div class="bigText">wednesday</div>
+          <div class="smallText">7 \ 10</div>
+        </div>
+        <div class="card">
+          <div class="bigText">thursday</div>
+          <div class="smallText">7 \ 10</div>
+          <br />
+        </div>
+        <div class="card">
+          <div class="bigText">friday</div>
+          <div class="smallText">7 \ 10</div>
+        </div>
+        <div class="card">
+          <div class="bigText">saturday</div>
+          <div class="smallText">7 \ 10</div>
+        </div>
+      </div>
+      <p
+        class="air display_as_block"
+        style="text-align: center; font-size: 16px;"
+      >
+        © Carmen López
+      </p>
+    </div>
+  </body>
+  <script src="src/scripts.js"></script>
+</html>
