@@ -24,14 +24,17 @@
       <div class="row inline--1x3">
         <div class="air card">
           <a id="bMode" class="midText toogle" href="">B</a>
-          <br />
-          <br />
-          <div id="wTime" class="midText boldText align_center">-</div>
         </div>
         <div class="air card align_center">
-          <span id="cityLabel" class="bigText boldText">Budva</span
-          ><span class="bigText boldText">,&nbsp;</span>
-          <span id="countryLabel" class="bigText boldText">ME</span>
+          <div id="wTime" class="smallText">-</div>
+          <span id="cityLabel" class="midText boldText">Budva</span
+          ><span class="midText boldText">,&nbsp;</span>
+          <span id="countryLabel" class="midText boldText">ME</span><br />
+          <span id="wGrad" class="bigText boldText">18</span>
+          <a id="wMetric" class="bigText links" href="">C|f</a>
+          <span>feels like&nbsp;</span><span id="feelsLike">35</span>
+        </div>
+        <div class="air card align_center">
           <span id="description" class="smallText display_as_block">-</span>
           <span class="smallText display_as_block"
             ><span>humidity —&nbsp;</span><span id="humidity"></span
@@ -45,13 +48,8 @@
             ><span>pressure —&nbsp;</span><span id="pressure"></span
             ><span>&nbsp;mb</span></span
           >
-          <span id="wGrad" class="bigText boldText">18 </span>
-          <a id="wMetric" class="bigText links" href="">C|f</a>
-          <div class="smallText">
-            <span>feels like&nbsp;</span><span id="feelsLike">35</span>
-          </div>
         </div>
-        <div class="air card smallText" style="width: fit-content;">
+        <div class="air card smallText">
           <div class="btn align_center">
             <button id="bLocate" class="btn">
               <img src="images/locateme.svg" style="width: 1.2rem;" />
@@ -70,22 +68,22 @@
       <br />
       <!-- Hourly temperatures -->
       <div class="row inline--1x4 align_left">
-        <div class="card">
+        <div class="card card__border">
           <div class="smallText boldText">morning</div>
           <span class="smallText">25</span>
           <span class="smallText">| feels like <span>25</span></span>
         </div>
-        <div class="card">
+        <div class="card card__border">
           <div class="smallText boldText">afternoon</div>
           <span class="smallText">25</span>
           <span class="smallText">| feels like <span>25</span></span>
         </div>
-        <div class="card">
+        <div class="card card__border">
           <div class="smallText boldText">evening</div>
           <span class="smallText">25</span>
           <span class="smallText">| feels like <span>25</span></span>
         </div>
-        <div class="card">
+        <div class="card card__border">
           <div class="smallText boldText">night</div>
           <span class="smallText">25</span>
           <span class="smallText">| feels like <span>25</span></span>
@@ -94,19 +92,19 @@
       </div>
       <!-- Daily temperatures -->
       <div class="air row inline--1x4 align_right">
-        <div class="card">
+        <div class="card card__border">
           <div class="smallText boldText">tomorrow</div>
           <div class="smallText"><span>25</span> \ <span>20</span></div>
         </div>
-        <div class="card">
+        <div class="card card__border">
           <div class="smallText boldText">tuesday</div>
           <div class="smallText"><span>25</span> \ <span>20</span></div>
         </div>
-        <div class="card">
+        <div class="card card__border">
           <div class="smallText boldText">wednesday</div>
           <div class="smallText"><span>25</span> \ <span>20</span></div>
         </div>
-        <div class="card">
+        <div class="card card__border">
           <div class="smallText boldText">thursday</div>
           <div class="smallText"><span>25</span> \ <span>20</span></div>
         </div>
@@ -118,8 +116,13 @@
       class="air display_as_block"
       style="text-align: center; font-size: 16px;"
     >
-      <a href="https://github.com/cgbl-90/weather-app">Open-source code</a> by
-      <a href="https://cgbl-90.github.io/carmen_portfolio/">Carmen López</a>
+      <a class="links" href="https://github.com/cgbl-90/weather-app"
+        >Open-source code</a
+      >
+      by
+      <a class="links" href="https://cgbl-90.github.io/carmen_portfolio/"
+        >Carmen López</a
+      >
     </div>
     <br />
   </body>

@@ -4,11 +4,11 @@
   --color--accent: tomato;
   --color--grey: lightgray;
   --border--radius: 5px;
-  --bigsize--for--tablet: 3rem;
-  --midsize--for--tablet: 2rem;
+  --bigsize--for--tablet: 2.5rem;
+  --midsize--for--tablet: 1.8rem;
   --smallsize--for--tablet: 1.4rem;
-  --bigsize--for--mobile: 4rem;
-  --midsize--for--mobile: 3rem;
+  --bigsize--for--mobile: 3rem;
+  --midsize--for--mobile: 2rem;
   --smallsize--for--mobile: 1.8rem;
   --horizontal--padding: 1rem;
   --vertical--padding: 0.5rem;
@@ -38,13 +38,15 @@ html {
 .card {
   padding: var(--vertical--padding) var(--horizontal--padding);
 }
+.card__border {
+  border: 0.02cm solid var(--color--grey);
+  border-radius: var(--border--radius);
+}
 .row {
   display: grid;
 }
 /* Buttons */
 .btn {
-  margin-left: 2px;
-  margin-right: 2px;
   padding-top: var(--horizontal--padding);
   padding-bottom: var(--horizontal--padding);
   border: 1px solid var(--color--grey);
@@ -60,8 +62,8 @@ html {
 input {
   border: none;
   outline: none;
-  width: 12ch;
   display: inline;
+  width: fit-content;
 }
 /* General settings */
 .align_right {
@@ -80,7 +82,7 @@ input {
   font-weight: bold;
 }
 .air {
-  margin-top: 3rem;
+  margin-top: 1.5rem;
 }
 /* Mobile */
 .smallText {
@@ -92,13 +94,16 @@ input {
 .bigText {
   font-size: var(--bigsize--for--mobile);
 }
+.inline--1x4 {
+  grid-template-columns: 1fr 1fr;
+}
 /* Tablet + Desktop */
 @media screen and (min-width: 668px) {
   .inline--1x4 {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
   .inline--1x3 {
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto 1fr auto auto;
   }
   .smallText {
     font-size: var(--smallsize--for--tablet);
@@ -118,7 +123,6 @@ input {
 }
 .links:hover,
 .links:focus {
-  text-decoration: underline;
   color: var(--color--accent);
 }
 .links:visited {
@@ -128,13 +132,13 @@ input {
   color: var(--color--primary);
   background: var(--color--primary);
   border: 1px solid var(--color--primary);
-  border-radius: 5px;
+  border-radius: 2px;
 }
 .toogle_light {
   color: var(--color--secondary);
   background: var(--color--secondary);
   border: 1px solid var(--color--primary);
-  border-radius: 5px;
+  border-radius: 2px;
 }
 .toggle,
 .toggle:visited,
