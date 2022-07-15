@@ -15,9 +15,12 @@ function convertToDay(a) {
   return allDays[a];
 }
 function wSetTime(now) {
-  pTime.innerHTML =
-    convertToDay(now.getDay()) + ", " + now.getHours() + ":" + now.getMinutes();
+  let a = convertToDay(now.getDay());
+  let b = now.getHours();
+  let c = String(now.getMinutes()).padStart(2, "0");
+  pTime.innerHTML = `${a}, ${b}:${c}`;
 }
+
 function convertToCelciusToFarenheit(event) {
   console.log("Event: click Celcius/Farenheit button");
   event.preventDefault();
@@ -68,6 +71,12 @@ function printLocation(response) {
   varPressure.innerHTML = response.data.main.pressure;
   GradToShow.innerHTML = Math.round(response.data.main.temp);
   varFeelsLike.innerHTML = Math.round(response.data.main.feels_like);
+  let v =
+    "http://openweathermap.org/img/wn/" +
+    response.data.weather[0].icon +
+    "@2x.png";
+  console.log(v);
+  weatherIcon.setAttribute("src", v);
 }
 function searchCity(response) {
   console.log(response);
@@ -85,8 +94,8 @@ function sWeatherCity(event) {
   console.log("Event: click search button");
   searchCity(cityToSearch.value);
 }
-function repeatSearch() {
-  cityToSearch.value = latestSearch.innerHTML;
+function repeatSearch(city) {
+  cityToSearch.value = city;
   searchCity(cityToSearch.value);
 }
 function returnPosition(response) {
@@ -119,6 +128,7 @@ var options = {
 let myButtonSearch = document.querySelector("#bSearch");
 let cityToSearch = document.querySelector("#cSearch");
 let latestSearch = document.querySelector("#latestSearchCity");
+let latestSearch2 = document.querySelector("latestSearchCity2");
 let countryToShow = document.querySelector("#countryLabel");
 let cityToShow = document.querySelector("#cityLabel");
 let myButtonLocate = document.querySelector("#bLocate");
@@ -133,6 +143,7 @@ let varPressure = document.querySelector("#pressure");
 let varFeelsLike = document.querySelector("#feelsLike");
 let apiKey = "05da73ad69c615537c1579e06c8164fb";
 let apiEndPoint = "https://api.openweathermap.org/data/2.5/weather?";
+let weatherIcon = document.querySelector("#weather_icon");
 let myLatitude = 0.0;
 let myLongitude = 0.0;
 /*  Clicks & Enter  */
@@ -141,8 +152,9 @@ cityToSearch.addEventListener("keypress", function (event) {
     sWeatherCity();
   }
 });
-latestSearch.addEventListener("click", repeatSearch);
+latestSearch.addEventListener("click", repeatSearch(latestSearch.innerHTML));
 myButtonSearch.addEventListener("click", sWeatherCity);
+latestSearch2.addEventListener("click", repeatSearch(latestSearch_2.innerHTML));
 myButtonBlackMode.addEventListener("click", swModes);
 MetricToShow.addEventListener("click", convertToCelciusToFarenheit);
 myButtonLocate.addEventListener("click", findCityUsingLatLong);

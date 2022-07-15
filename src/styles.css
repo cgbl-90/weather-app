@@ -102,8 +102,8 @@ input {
   .inline--1x4 {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
-  .inline--1x3 {
-    grid-template-columns: auto 1fr auto auto;
+  .inline--1x5 {
+    grid-template-columns: auto 1fr auto auto auto;
   }
   .smallText {
     font-size: var(--smallsize--for--tablet);
