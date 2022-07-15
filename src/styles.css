@@ -1,7 +1,7 @@
 :root {
   --color--primary: #151515;
   --color--secondary: white;
-  --color--accent: tomato;
+  --color--accent: rgb(71, 99, 255);
   --color--grey: lightgray;
   --border--radius: 5px;
   --bigsize--for--tablet: 2.5rem;
@@ -46,6 +46,9 @@ html {
   display: grid;
 }
 /* Buttons */
+.input-group {
+  width: fit-content;
+}
 .btn {
   padding-top: var(--horizontal--padding);
   padding-bottom: var(--horizontal--padding);
@@ -53,8 +56,13 @@ html {
   border-radius: var(--border--radius);
   background: var(--color--secondary);
   font-family: "Raleway", sans-serif;
-  width: fit-content;
   margin: 0 auto;
+}
+#bLocate {
+  margin-left: 2px;
+}
+#bSearch {
+  margin-right: 2px;
 }
 .btn:hover,
 .btn:focus {
@@ -65,7 +73,7 @@ input {
   border: none;
   outline: none;
   display: inline;
-  width: fit-content;
+  width: 17ch;
 }
 /* General settings */
 .align_right {
