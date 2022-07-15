@@ -53,6 +53,8 @@ html {
   border-radius: var(--border--radius);
   background: var(--color--secondary);
   font-family: "Raleway", sans-serif;
+  width: fit-content;
+  margin: 0 auto;
 }
 .btn:hover,
 .btn:focus {

@@ -80,7 +80,6 @@ function printLocation(response) {
 }
 function searchCity(response) {
   console.log(response);
-  latestSearch.innerHTML = response;
   if (response === "") {
     alert("Indicate the city");
   } else {
@@ -94,10 +93,7 @@ function sWeatherCity(event) {
   console.log("Event: click search button");
   searchCity(cityToSearch.value);
 }
-function repeatSearch(city) {
-  cityToSearch.value = city;
-  searchCity(cityToSearch.value);
-}
+
 function returnPosition(response) {
   console.log(response.coords.latitude);
   console.log(response.coords.longitude);
@@ -127,8 +123,6 @@ var options = {
 };
 let myButtonSearch = document.querySelector("#bSearch");
 let cityToSearch = document.querySelector("#cSearch");
-let latestSearch = document.querySelector("#latestSearchCity");
-let latestSearch2 = document.querySelector("latestSearchCity2");
 let countryToShow = document.querySelector("#countryLabel");
 let cityToShow = document.querySelector("#cityLabel");
 let myButtonLocate = document.querySelector("#bLocate");
@@ -147,17 +141,15 @@ let weatherIcon = document.querySelector("#weather_icon");
 let myLatitude = 0.0;
 let myLongitude = 0.0;
 /*  Clicks & Enter  */
+myButtonSearch.addEventListener("click", sWeatherCity);
+MetricToShow.addEventListener("click", convertToCelciusToFarenheit);
+myButtonBlackMode.addEventListener("click", swModes);
+myButtonLocate.addEventListener("click", findCityUsingLatLong);
 cityToSearch.addEventListener("keypress", function (event) {
   if (event.key === "Enter") {
     sWeatherCity();
   }
 });
-latestSearch.addEventListener("click", repeatSearch(latestSearch.innerHTML));
-myButtonSearch.addEventListener("click", sWeatherCity);
-latestSearch2.addEventListener("click", repeatSearch(latestSearch_2.innerHTML));
-myButtonBlackMode.addEventListener("click", swModes);
-MetricToShow.addEventListener("click", convertToCelciusToFarenheit);
-myButtonLocate.addEventListener("click", findCityUsingLatLong);
 /* Initial settings */
 let now = new Date();
 let initialCity = "Santo Domingo";
