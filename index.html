@@ -37,6 +37,7 @@
         <div class="align_center">
           <img
             id="weather_icon"
+            class="img_icons"
             src="http://openweathermap.org/img/wn/10d@2x.png"
           />
         </div>
@@ -69,52 +70,28 @@
       </div>
       <br />
       <!-- Hourly temperatures -->
-      <div class="row inline--1x4 align_left">
+      <div id="forecast--hourly" class="row inline--1x4 align_left">
         <div class="card card__border">
-          <div class="smallText boldText">morning</div>
-          <span class="smallText">25</span>
-          <span class="smallText">| feels like <span>25</span></span>
-        </div>
-        <div class="card card__border">
-          <div class="smallText boldText">afternoon</div>
-          <span class="smallText">25</span>
-          <span class="smallText">| feels like <span>25</span></span>
-        </div>
-        <div class="card card__border">
-          <div class="smallText boldText">evening</div>
-          <span class="smallText">25</span>
-          <span class="smallText">| feels like <span>25</span></span>
-        </div>
-        <div class="card card__border">
-          <div class="smallText boldText">night</div>
-          <span class="smallText">25</span>
-          <span class="smallText">| feels like <span>25</span></span>
-          <br />
+          <div class="smallText boldText">&{}</div>
+          <div class="smallText">&{}</div>
+          <span class="smallText">&{}</span>
+          <span class="smallText"> | &{}</span>
+          <img
+            class="img_icons"
+            src="http://openweathermap.org/img/wn/&{}@2x.png"
+          />
         </div>
       </div>
       <!-- Daily temperatures -->
-      <div class="air row inline--1x4 align_right">
+      <div id="forecast--daily" class="air row inline--1x4 align_right">
         <div class="card card__border">
           <div class="smallText boldText">tomorrow</div>
           <div class="smallText"><span>25</span> \ <span>20</span></div>
         </div>
-        <div class="card card__border">
-          <div class="smallText boldText">tuesday</div>
-          <div class="smallText"><span>25</span> \ <span>20</span></div>
-        </div>
-        <div class="card card__border">
-          <div class="smallText boldText">wednesday</div>
-          <div class="smallText"><span>25</span> \ <span>20</span></div>
-        </div>
-        <div class="card card__border">
-          <div class="smallText boldText">thursday</div>
-          <div class="smallText"><span>25</span> \ <span>20</span></div>
-        </div>
-        <br />
-        <br />
       </div>
+      <br />
     </div>
-    <div
+    <span
       class="air display_as_block"
       style="text-align: center; font-size: 16px;"
     >
@@ -125,8 +102,7 @@
       <a class="links" href="https://cgbl-90.github.io/carmen_portfolio/"
         >Carmen López</a
       >
-    </div>
-    <br />
+    </span>
   </body>
   <script src="src/scripts.js"></script>
 </html>

@@ -156,3 +156,7 @@ input {
 .toggle:focus {
   text-decoration: none;
 }
+.img_icons {
+  width: 80px;
+  height: 80px;
+}

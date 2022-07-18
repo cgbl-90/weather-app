@@ -60,8 +60,19 @@ function swModes(event) {
     myButtonBlackMode.innerHTML = "B";
   }
 }
+function getForecast(id) {
+  let apiRequest =
+    "http://api.openweathermap.org/data/2.5/forecast?id=" +
+    id +
+    "&appid=" +
+    apiKey +
+    "&&units=metric";
+  console.log(apiRequest);
+}
 function printLocation(response) {
   console.log(response.data);
+  myLatitude = response.data.coord.lat;
+  myLongitude = response.data.coord.lon;
   cityToShow.innerHTML = response.data.name;
   MetricToShow.innerHTML = "C|f";
   countryToShow.innerHTML = response.data.sys.country;
@@ -77,6 +88,7 @@ function printLocation(response) {
     "@2x.png";
   console.log(v);
   weatherIcon.setAttribute("src", v);
+  getForecast(response.data.id);
 }
 function searchCity(response) {
   console.log(response);
