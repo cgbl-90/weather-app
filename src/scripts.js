@@ -60,15 +60,61 @@ function swModes(event) {
     myButtonBlackMode.innerHTML = "B";
   }
 }
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let hour = String(date.getHours()).padStart(2, "0");
+  let mins = String(date.getMinutes()).padStart(2, "0");
+  let time = hour + ":" + mins;
+  return time;
+}
+
+function printHours(response) {
+  let forecast = response.data.list;
+  console.log(forecast);
+  let forecastElement = document.querySelector("#forecast--hourly");
+  let forecastHTML = `<div id="forecast--hourly" class="air row inline--1x4 align_left">`;
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 4) {
+      index = index + 1;
+      forecastHTML =
+        forecastHTML +
+        `
+      <div class="card smallText">
+        <div>${formatDay(forecastDay.dt)}</div>
+        <img
+          src="http://openweathermap.org/img/wn/${
+            forecastDay.weather[0].icon
+          }@2x.png"
+          alt=""
+          width="42"
+        />
+        <div>
+          <span class="boldText"> ${Math.round(
+            forecastDay.main.temp_max
+          )}° </span>
+          <span> ${Math.round(forecastDay.main.temp_min)}° </span>
+        </div>
+      </div>
+  `;
+    }
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  console.log(forecastHTML);
+  forecastElement.innerHTML = forecastHTML;
+}
+
 function getForecast(id) {
   let apiRequest =
-    "http://api.openweathermap.org/data/2.5/forecast?id=" +
+    "https://api.openweathermap.org/data/2.5/forecast?id=" +
     id +
     "&appid=" +
     apiKey +
     "&&units=metric";
   console.log(apiRequest);
+  console.log("process: get forecast per hour");
+  axios.get(apiRequest).then(printHours);
 }
+
 function printLocation(response) {
   console.log(response.data);
   myLatitude = response.data.coord.lat;
@@ -88,6 +134,7 @@ function printLocation(response) {
     "@2x.png";
   console.log(v);
   weatherIcon.setAttribute("src", v);
+  console.log("process: get forecast per hour");
   getForecast(response.data.id);
 }
 function searchCity(response) {
