@@ -60,40 +60,81 @@ function swModes(event) {
     myButtonBlackMode.innerHTML = "B";
   }
 }
-function formatDay(timestamp) {
+function formatHour(timestamp) {
   let date = new Date(timestamp * 1000);
   let hour = String(date.getHours()).padStart(2, "0");
   let mins = String(date.getMinutes()).padStart(2, "0");
   let time = hour + ":" + mins;
   return time;
 }
-
-function printHours(response) {
-  let forecast = response.data.list;
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  return days[day];
+}
+function printDays(response) {
+  let forecast = response.data.daily;
   console.log(forecast);
-  let forecastElement = document.querySelector("#forecast--hourly");
-  let forecastHTML = `<div id="forecast--hourly" class="air row inline--1x4 align_left">`;
+  let forecastElement = document.querySelector("#forecast--daily");
+  let forecastHTML = `<div id="forecast--daily" class="air row inline--1x4 align_right">`;
   forecast.forEach(function (forecastDay, index) {
-    if (index < 4) {
+    if (index < 8) {
       index = index + 1;
       forecastHTML =
         forecastHTML +
         `
-      <div class="card smallText">
-        <div>${formatDay(forecastDay.dt)}</div>
+      <div class="card forecast smallText align_center">
+        <span class="boldText display_as_block">${formatDay(
+          forecastDay.dt
+        )}</span>
         <img
-          src="http://openweathermap.org/img/wn/${
+          src="https://openweathermap.org/img/wn/${
             forecastDay.weather[0].icon
           }@2x.png"
           alt=""
           width="42"
         />
-        <div>
-          <span class="boldText"> ${Math.round(
-            forecastDay.main.temp_max
-          )}° </span>
-          <span> ${Math.round(forecastDay.main.temp_min)}° </span>
-        </div>
+          <span class="align_right display_as_block"> ${Math.round(
+            forecastDay.temp.max
+          )}°| ${Math.round(forecastDay.temp.min)}°</span>
+      </div>
+  `;
+    }
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  console.log(forecastHTML);
+  forecastElement.innerHTML = forecastHTML;
+}
+
+function printHours(response) {
+  let forecast = response.data.hourly;
+  console.log(forecast);
+  let forecastElement = document.querySelector("#forecast--hourly");
+  let forecastHTML = `<div id="forecast--hourly" class="air row inline--1x4">`;
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 8) {
+      index = index + 1;
+      forecastHTML =
+        forecastHTML +
+        `
+      <div class="card forecast smallText align_center">
+        <span class="boldText display_as_block">${formatHour(
+          forecastDay.dt
+        )}</span>
+        <img
+          src="https://openweathermap.org/img/wn/${
+            forecastDay.weather[0].icon
+          }@2x.png"
+          alt=""
+          width="42"
+        />
+          <span class="align_left display_as_block"> ${Math.round(
+            forecastDay.temp
+          )}°</span>
+          <span class="align_left display_as_block"> feels like ${Math.round(
+            forecastDay.feels_like
+          )}°</span>
       </div>
   `;
     }
@@ -105,14 +146,16 @@ function printHours(response) {
 
 function getForecast(id) {
   let apiRequest =
-    "https://api.openweathermap.org/data/2.5/forecast?id=" +
-    id +
+    "https://api.openweathermap.org/data/2.5/onecall?lat=" +
+    myLatitude +
+    "&lon=" +
+    myLongitude +
     "&appid=" +
     apiKey +
     "&&units=metric";
   console.log(apiRequest);
-  console.log("process: get forecast per hour");
   axios.get(apiRequest).then(printHours);
+  axios.get(apiRequest).then(printDays);
 }
 
 function printLocation(response) {
@@ -129,7 +172,7 @@ function printLocation(response) {
   GradToShow.innerHTML = Math.round(response.data.main.temp);
   varFeelsLike.innerHTML = Math.round(response.data.main.feels_like);
   let v =
-    "http://openweathermap.org/img/wn/" +
+    "https://openweathermap.org/img/wn/" +
     response.data.weather[0].icon +
     "@2x.png";
   console.log(v);

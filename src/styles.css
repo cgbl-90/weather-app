@@ -14,7 +14,6 @@
   --vertical--padding: 0.5rem;
 }
 html {
-  height: 100vh;
   font-family: "Raleway", sans-serif;
   font-size: 62.5%; /* 62.5% of 16 = 10 rem */
 }
@@ -38,12 +37,18 @@ html {
 .card {
   padding: var(--vertical--padding) var(--horizontal--padding);
 }
+.forecast {
+  border: 0.001cm solid var(--color--accent);
+  border-radius: 15px;
+}
 .card__border {
   border: 0.02cm solid var(--color--grey);
   border-radius: var(--border--radius);
 }
 .row {
   display: grid;
+  grid-gap: fit-content;
+  gap: 2px;
 }
 /* Buttons */
 .input-group {
@@ -105,12 +110,12 @@ input {
   font-size: var(--bigsize--for--mobile);
 }
 .inline--1x4 {
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 /* Tablet + Desktop */
 @media screen and (min-width: 668px) {
   .inline--1x4 {
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
   }
   .inline--1x5 {
     grid-template-columns: auto 1fr auto auto auto;
@@ -159,4 +164,8 @@ input {
 .img_icons {
   width: 80px;
   height: 80px;
+}
+#forecast--hourly,
+#forecast--daily {
+  grid-row-gap: fit-content;
 }
