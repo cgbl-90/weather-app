@@ -2,7 +2,7 @@
 Created with Visual Studio Code
 Tech stack: HTML, CSS, Javascript
 API: https://openweathermap.org/api (Current Weather Data, One Call API)
-Published: https://cgbl-90.github.io/carmen_portfolio/
+Published: https://weather-app-by-carmen.netlify.app/
 Font family: Raleway (https://fonts.google.com/specimen/Raleway)
 Features:
 - Search by city
